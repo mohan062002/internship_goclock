@@ -21,13 +21,15 @@ const BASE_URL=process.env.BASE_URL;
 const PORT=process.env.PORT || 5000;
 
 // cors middleware configuration
-const corsOptions = {
-  origin:BASE_URL,
-  credentials: true, //access-control-allow-credentials:tru
-  optionSuccessStatus: 200,
-};
 
-app.use(cors(corsOptions));
+
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://647867760f60f65da5367bd4--euphonious-taffy-4b4fda.netlify.app');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Credentials', 'true'); // Set 'Access-Control-Allow-Credentials' to 'true'
+  next();
+});
 
 //connecting to the database
 mongoose.connect(process.env.MONGO_URL);
